@@ -32,4 +32,3 @@ csawesome <- csawesome %>%
 
 csawesome <- csawesome[,c('Anon Student Id','Problem Name','Level (Chapter)','Level (SubChapter)', 'time_diff_s','Selection','Action','Input','Feedback Classification')]
 
-# --------------------------- 1b.
