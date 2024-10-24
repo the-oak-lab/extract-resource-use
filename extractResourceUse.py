@@ -61,4 +61,13 @@ student_list = list(df['Anon Student Id'].unique())
 for student in student_list:
   df[df['Anon Student Id'] == student] = df[df['Anon Student Id'] == student].apply(counter.increment_counter,axis=1)
 
-df.to_csv('~/data/all_students_wcounters.csv',index=False)
+# --------------------------- 2. initialize new columns for time spent on each resource
+df['page_counter'] = df['page_counter'].replace(0, pd.NA)
+df['video_counter'] = df['video_counter'].replace(0, pd.NA)
+df['act_counter'] = df['act_counter'].replace(0, pd.NA)
+
+df['page_time'] = df.apply(lambda row: pd.NA if pd.isna(row['page_counter']) else row['time_s_winsorized'], axis=1)
+df['video_time'] = df.apply(lambda row: pd.NA if pd.isna(row['video_counter']) else row['time_s_winsorized'], axis=1)
+df['act_time'] = df.apply(lambda row: pd.NA if pd.isna(row['act_counter']) else row['time_s_winsorized'], axis=1)
+
+df.to_csv('~/data/all_students_wcounters.csv', index=False)
