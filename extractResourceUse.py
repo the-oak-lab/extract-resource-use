@@ -7,6 +7,8 @@ from rpy2.robjects.vectors import StrVector
 import pandas as pd
 import numpy as np
 
+import argparse
+
 # from https://rviews.rstudio.com/2022/05/25/calling-r-from-python-with-rpy2/
 utils = importr('utils')
 
@@ -25,11 +27,18 @@ library("finalfit")
 
 # --------------------------- 1a. open and format the data
 robjects.r('gc()')
-robjects.r('PREFIX_PATH = "~/data"')
+
+parser = argparse.ArgumentParser(description='Process some data')
+parser.add_argument('file_path', type=str, help='data file to process')
+args = parser.parse_args()
+file_path = args.file_path
+
+robjects.r('PREFIX_PATH = "{file_path}"')
+
 
 # puts csawesome_datashop.txt file into R data table named csawesome
 robjects.r('''
-csawesome <- fread(paste0(PREFIX_PATH, '/csawesome_datashop.txt'), verbose=TRUE)
+csawesome <- fread("{file_path}", verbose=TRUE)
 ''')
 
 # rearranges the csawesome data table, adds more columns
