@@ -1,6 +1,7 @@
-from utils import Counter
+from utils.utils import Counter
 
-import rpy2.robjects as robjects, pandas2ri
+import rpy2.robjects as robjects
+from rpy2.robjects import pandas2ri
 from rpy2.robjects.packages import importr, data
 from rpy2.robjects.vectors import StrVector
 
