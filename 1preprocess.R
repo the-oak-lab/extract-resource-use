@@ -16,6 +16,7 @@ gc()
 # Get command-line arguments
 args <- commandArgs(trailingOnly = TRUE)
 file_path <- args[1]
+prefix_path <- dirname(file_path)
 
 # Print the file path (for debugging purposes)
 print(paste("File path:", file_path))
@@ -39,4 +40,5 @@ csawesome <- csawesome[, c("Anon Student Id", "Problem Name", "Level (Chapter)",
                            "Action", "Input", "Feedback Classification")]
 
 # Write the data to a CSV file
-write.csv(csawesome, file = paste0("preprocess_output.csv"), row.names = FALSE)
+output_file <- file.path(prefix_path, "preprocess_output.csv")
+write.csv(csawesome, file = output_file, row.names = FALSE)

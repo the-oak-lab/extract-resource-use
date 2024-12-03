@@ -16,6 +16,7 @@ gc()
 # Get command-line arguments
 args <- commandArgs(trailingOnly = TRUE)
 file_path <- args[1]
+prefix_path <- dirname(file_path)
 
 # Print the file path (for debugging purposes)
 print(paste("File path:", file_path))
@@ -37,4 +38,6 @@ csawesome$video_time <- ifelse(is.na(csawesome$video_counter), NA,
 csawesome$act_time <- ifelse(is.na(csawesome$act_counter), NA,
                              csawesome$time_s_winsorized)
 
-write.csv(csawesome, file = paste0("postprocess_output.csv"), row.names = FALSE)
+# write to final csv file
+output_file <- file.path(prefix_path, "postprocess_output.csv")
+write.csv(csawesome, file = output_file, row.names = FALSE)
