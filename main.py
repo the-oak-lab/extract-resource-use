@@ -30,8 +30,11 @@ df.loc[:,'act_counter'] = pd.NA
 student_list = list(df['Anon Student Id'].unique())
 
 for student in student_list:
-  df[df['Anon Student Id'] == student] = df[df['Anon Student Id'] == student].apply(counter.increment_counter,axis=1)
-
+    student_rows = df[df['Anon Student Id'] == student]
+    for idx in student_rows.index:
+        row = df.loc[idx]
+        df.loc[idx] = counter.increment_counter(row, df=df, index=idx)
+        
 counted_path = os.path.join(prefix_path, 'counted.csv')
 df.to_csv(counted_path,index=False)
 

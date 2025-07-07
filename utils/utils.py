@@ -1,4 +1,5 @@
 # assuming sorted by time
+import pandas as pd
 
 class Counter:
     def __init__(self,seed):
@@ -86,7 +87,7 @@ class Counter:
 
 
 
-    def initialize_params(self,row):
+    def initialize_params(self, row, df, index):
         student_id = row['Anon Student Id']
         problem_name = row['Problem Name']
         level = row['Level (Chapter)']
@@ -127,10 +128,10 @@ class Counter:
 
 
 
-    def increment_counter(self,row,only_page=False, only_video = False, only_act = False):
-        student_id, problem_name, level, sublevel, index, prev_row,\
-                prev_student_id, prev_problem_name, prev_level, previous_page,\
-                curr_page, prev_selection, selection = self.initialize_params(row)
+    def increment_counter(self, row, df, index, only_page=False, only_video=False, only_act=False):
+        student_id, problem_name, level, sublevel, index, prev_row, \
+          prev_student_id, prev_problem_name, prev_level, previous_page, \
+          curr_page, prev_selection, selection = self.initialize_params(row, df, index)
 
         counter_type = self.return_counter_type_by_selection(sublevel,selection) if not(only_page) else 'page_counter'
         other_counters = [x for x in self.counter.keys() if x != counter_type] # whatever is not this counter type

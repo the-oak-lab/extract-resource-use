@@ -1,8 +1,8 @@
-setwd("~/extract-resource-use/")
+# setwd("~/extract-resource-use/")
 
-install.packages("DescTools")
-install.packages("tidyverse")
-install.packages("finalfit")
+# install.packages("DescTools")
+# install.packages("tidyverse")
+# install.packages("finalfit")
 
 library("data.table")
 library("dplyr")
